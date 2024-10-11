@@ -19,6 +19,16 @@ def _require_env(name):
         raise ImproperlyConfigured('Required environment variable "{}" is not set.'.format(name))
     return value
 
+# smtp setup
+email_name = _require_env('EMAIL_HOST_USER')
+email_password = _require_env('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_USER = email_name 
+EMAIL_HOST_PASSWORD = email_password 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
