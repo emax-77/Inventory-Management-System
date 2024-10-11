@@ -10,6 +10,15 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+# env values setup / raise an error if the env variable isn't set
+import os
+from django.core.exceptions import ImproperlyConfigured
+def _require_env(name):
+    value = os.getenv(name)
+    if value is None:
+        raise ImproperlyConfigured('Required environment variable "{}" is not set.'.format(name))
+    return value
+
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
