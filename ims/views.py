@@ -35,6 +35,7 @@ def product_delete(request, pk):
     return render(request, 'product_confirm_delete.html', {'product': product})
 
 def sale_create(request):
+    mysales = Sale.objects.all()
     if request.method == 'POST':
         form = SaleForm(request.POST)
         if form.is_valid():
@@ -42,4 +43,4 @@ def sale_create(request):
             return redirect('product_list')
     else:
         form = SaleForm()
-    return render(request, 'sale_form.html', {'form': form})
+    return render(request, 'sale_form.html', {'form': form, 'mysales': mysales})
