@@ -3,8 +3,9 @@ from .models import Product, Sale
 from .forms import ProductForm, SaleForm
 
 def product_list(request):
+    sales = Sale.objects.all()
     products = Product.objects.all()
-    return render(request, 'product_list.html', {'products': products})
+    return render(request, 'product_list.html', {'products': products, "sales": sales})
 
 def product_create(request):
     if request.method == 'POST':
@@ -35,7 +36,7 @@ def product_delete(request, pk):
     return render(request, 'product_confirm_delete.html', {'product': product})
 
 def sale_create(request):
-    mysales = Sale.objects.all()
+    sales = Sale.objects.all()
     if request.method == 'POST':
         form = SaleForm(request.POST)
         if form.is_valid():
@@ -43,4 +44,4 @@ def sale_create(request):
             return redirect('product_list')
     else:
         form = SaleForm()
-    return render(request, 'sale_form.html', {'form': form, 'mysales': mysales})
+    return render(request, 'sale_form.html', {'form': form, 'sales': sales})
