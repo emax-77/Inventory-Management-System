@@ -1,15 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: auto auto;
+            gap: 5px;
+            background-color: #dddddd;
+            padding: 5px;
+            border-radius: 8px;
+        }
+
+        .grid-container > div{
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px 0;
+            padding: 10px;
+        }
 
 
-    <h2>Products</h2>
-<a href="{% url 'product_create' %}">Add New Product</a>
-<ul>
-    {% for product in products %}
-    <li>{{ product.name }} - Stock: {{ product.quantity_in_stock }}
-        <a href="{% url 'product_edit' product.id %}">Edit</a> |
-        <a href="{% url 'product_delete' product.id %}">Delete</a>
-    </li>
-    {% endfor %}
-</ul>
+    </style>
+</head>
+<body>
 
-<a href="{% url 'sale_create' %}">Create Sale</a>
+    <div class="grid-container">
+        <div class="grid-item1">
+            <h2>Products</h2>
+            <a href="{% url 'product_create' %}">Add New Product</a>
+            <ul>
+                {% for product in products %}
+                <li>{{ product.name }} - Stock: {{ product.quantity_in_stock }}
+                    <a href="{% url 'product_edit' product.id %}">Edit</a> |
+                    <a href="{% url 'product_delete' product.id %}">Delete</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="grid-item2">
+            <h2>Sales</h2>
+            <ul>
+                {% for sale in sales %}
+                <li>{{ sale.product.name }} - Quantity Sold: {{ sale.quantity_sold }} - Date: {{ sale.sale_date }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    
+    <a href="{% url 'sale_create' %}">Create Sale</a>
+    
+</body>
+</html>
+
+
+
+
     
