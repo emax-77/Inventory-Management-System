@@ -16,12 +16,12 @@
         </tr>
       </thead>
       <tbody>
-        {% for x in mysales %}
+        {% for sale in sales %}
           <tr>
-            <td>{{ x.id }}</td>
-            <td>{{ x.product }}</td>
-            <td>{{ x.quantity_sold }}</td>
-            <td>{{ x.sale_date }}</td>
+            <td>{{ sale.id }}</td>
+            <td>{{ sale.product }}</td>
+            <td>{{ sale.quantity_sold }}</td>
+            <td>{{ sale.sale_date }}</td>
           </tr>
         {% endfor %}
       </tbody>
