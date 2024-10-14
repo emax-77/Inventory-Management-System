@@ -1,4 +1,6 @@
-<font color="red">my very new Django project which is still under construction !</font>
+```diff
+- my new Django project which is still under construction!
+```
 
 # Inventory Management System
 ## Simple IMS for small business or home use 
