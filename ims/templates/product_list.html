@@ -26,6 +26,8 @@
 </head>
 <body>
 
+    <h1 style="text-align: center;"> Inventory Management System</h1>
+
     <div class="grid-container">
         <div class="grid-item1">
             <h2>Products</h2>
@@ -41,6 +43,7 @@
         </div>
         <div class="grid-item2">
             <h2>Sales</h2>
+            <a href="{% url 'sale_create' %}">Create Sale</a>
             <ul>
                 {% for sale in sales %}
                 <li>{{ sale.product.name }} - Quantity Sold: {{ sale.quantity_sold }} - Date: {{ sale.sale_date }}</li>
@@ -49,7 +52,7 @@
         </div>
     </div>
     
-    <a href="{% url 'sale_create' %}">Create Sale</a>
+    
     
 </body>
 </html>
