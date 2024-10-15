@@ -3,59 +3,134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Inventory Management System</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin: 20px 0;
+            font-size: 2.5rem;
+        }
 
         .grid-container {
             display: grid;
-            grid-template-columns: auto auto;
-            gap: 5px;
-            background-color: #dddddd;
-            padding: 5px;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .grid-container > div {
+            background-color: #ffffff;
+            padding: 20px;
             border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
-        .grid-container > div{
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 20px 0;
+        h2 {
+            color: #555;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        a:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
             padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
+        .action-links {
+            font-size: 0.9rem;
+        }
+
+        .action-links a {
+            margin-left: 10px;
+        }
+
+        .button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            text-align: center;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
 
     </style>
 </head>
 <body>
 
-    <h1 style="text-align: center;"> Inventory Management System</h1>
+    <h1>Inventory Management System</h1>
 
     <div class="grid-container">
         <div class="grid-item1">
-            <h2>Products</h2>
-            <a href="{% url 'product_create' %}">Add New Product</a>
+            <h2>Products <a class="button" href="{% url 'product_create' %}">Add New Product</a> </h2>
+            <br>
             <ul>
                 {% for product in products %}
-                <li>{{ product.name }} - Stock: {{ product.quantity_in_stock }}
-                    <a href="{% url 'product_edit' product.id %}">Edit</a> |
-                    <a href="{% url 'product_delete' product.id %}">Delete</a>
+                <li>
+                    <span>{{ product.name }} - Stock: {{ product.quantity_in_stock }}</span>
+                    <span class="action-links">
+                        <a href="{% url 'product_edit' product.id %}">Edit</a> |
+                        <a href="{% url 'product_delete' product.id %}">Delete</a>
+                    </span>
                 </li>
                 {% endfor %}
             </ul>
         </div>
         <div class="grid-item2">
-            <h2>Sales</h2>
-            <a href="{% url 'sale_create' %}">Create Sale</a>
+            <h2>Sales <a class="button" href="{% url 'sale_create' %}">Create Sale</a></h2>
             <ul>
                 {% for sale in sales %}
-                <li>{{ sale.product.name }} - Quantity Sold: {{ sale.quantity_sold }} - Date: {{ sale.sale_date }}</li>
+                <li>
+                    <span>{{ sale.product.name }} - Quantity Sold: {{ sale.quantity_sold }} - Date: {{ sale.sale_date }}</span>
+                </li>
                 {% endfor %}
             </ul>
         </div>
     </div>
-    
-    
-    
+
 </body>
 </html>
+
 
 
 
