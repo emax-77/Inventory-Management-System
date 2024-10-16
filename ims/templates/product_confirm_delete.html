@@ -9,13 +9,14 @@
 </head>
 <body>
 
-    <h2>Confirm Product Deletion</h2>
+    <h1>Confirm Product Deletion</h1>
 
     <p>Are you sure you want to delete the product: <strong>{{ product.name }}</strong>?</p>
 
     <form method="post">
         {% csrf_token %}
         <button type="submit" class="button">Yes, delete</button>
+        <br>
         <a href="{% url 'product_list' %}" class="button button-secondary">Cancel</a>
     </form>
 
