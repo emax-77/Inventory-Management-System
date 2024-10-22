@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+
+    <h1>Inventory Management System</h1>
+
+    <div class="grid-container">
+        <div class="grid-item1">
+            <h2>Products <a class="button" href="{% url 'product_create' %}">Add New Product</a></h2>
+            <ul>
+                {% for product in products %}
+                <li>{{ product.name }} - Stock: {{ product.quantity_in_stock }}
+                    <div class="action-links">
+                        <a href="{% url 'product_edit' product.id %}">Edit</a> |
+                        <a href="{% url 'product_delete' product.id %}">Delete</a>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="grid-item2">
+            <h2>Sales <a class="button" href="{% url 'sale_create' %}">Create Sale</a></h2>
+            <ul>
+                {% for sale in sales %}
+                <li>{{ sale.product.name }} - Quantity Sold: {{ sale.quantity_sold }} - Date: {{ sale.sale_date }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="grid-item3">
+            <h2>Other options</h2>
+            <a class="button" href="{% url 'invoice_create' %}">Create Invoice</a>
+        </div>
+    </div>
+
+</body>
+</html>
