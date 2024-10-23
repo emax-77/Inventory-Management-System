@@ -12,14 +12,15 @@
     <h2>Invoice {{ invoice.invoice_number }}</h2>
 
     <p>Date: {{ invoice.date_created }}</p>
-    <p>Total Amount: ${{ invoice.total_amount }}</p>
+    <p>Total Amount: €{{ invoice.total_amount }}</p>
 
     <h3>Sales</h3>
     <ul>
         {% for sale in invoice.sales.all %}
-        <li>{{ sale.product.name }} - Quantity: {{ sale.quantity_sold }} - Price: ${{ sale.product.price }}</li>
+        <li>{{ sale.product.name }} - Quantity: {{ sale.quantity_sold }} - Price: €{{ sale.product.price }}</li>
         {% endfor %}
     </ul>
+    <a href="{% url 'product_list' %}">Home</a>
 
 </body>
 </html>
