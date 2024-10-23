@@ -2,14 +2,14 @@
 
 # Inventory Management System
 ## Simple IMS for small business or home use 
-## Project includes:
+
+## Project includes (working):
 
 - Product Management (Create, Read, Update, Delete)
 - Sales 
-- Notifications and Alerts
-
+- Invoices
+- Email Notifications and Alerts (when stock is low)
 
 ## What's next?
-- Invoices
 - Orders
 - Other features possible - will see :)
