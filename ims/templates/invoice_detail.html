@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice {{ invoice.invoice_number }}</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+
+    <h2>Invoice {{ invoice.invoice_number }}</h2>
+
+    <p>Date: {{ invoice.date_created }}</p>
+    <p>Total Amount: ${{ invoice.total_amount }}</p>
+
+    <h3>Sales</h3>
+    <ul>
+        {% for sale in invoice.sales.all %}
+        <li>{{ sale.product.name }} - Quantity: {{ sale.quantity_sold }} - Price: ${{ sale.product.price }}</li>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>
