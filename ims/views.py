@@ -47,5 +47,29 @@ def sale_create(request):
     return render(request, 'sale_form.html', {'form': form, 'sales': sales})
 
 
+from django.shortcuts import render, redirect
+from .forms import InvoiceForm
+from .models import Invoice, Sale
+
 def invoice_create(request):
-    return render(request, 'invoice_form.html')
+    if request.method == 'POST':
+        form = InvoiceForm(request.POST)
+        if form.is_valid():
+            invoice = form.save(commit=False)
+            
+            # Calculate total amount
+            total_amount = 0
+            for sale in form.cleaned_data['sales']:
+                total_amount += sale.product.price * sale.quantity_sold  
+            
+            invoice.total_amount = total_amount
+            invoice.save()
+            
+            # Add the selected sales to the invoice
+            form.save_m2m()
+            
+            return redirect('invoice_detail', pk=invoice.pk)  
+    else:
+        form = InvoiceForm()
+
+    return render(request, 'invoice_form.html', {'form': form})
