@@ -1,8 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Product, Sale
 from .forms import ProductForm, SaleForm
-from django.http import HttpResponse
-from django.template import loader
 
 def product_list(request):
     sales = Sale.objects.all()
@@ -50,5 +48,4 @@ def sale_create(request):
 
 
 def invoice_create(request):
-    template = loader.get_template('invoice_form.html')
-    return HttpResponse(template.render(request=request))
+    return render(request, 'invoice_form.html')
