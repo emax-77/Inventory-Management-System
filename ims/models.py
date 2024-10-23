@@ -36,4 +36,13 @@ class Sale(models.Model):
 
     def __str__(self):
         return f"Sale of {self.quantity_sold} {self.product.name}"
+    
+class Invoice(models.Model):
+    invoice_number = models.CharField(max_length=100)
+    date_created = models.DateTimeField(auto_now_add=True)
+    sales = models.ManyToManyField('Sale')  # Link to Sale model
+    total_amount = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def __str__(self):
+        return self.invoice_number
 
