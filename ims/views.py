@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
 from .models import Product, Sale
 from .forms import ProductForm, SaleForm
+from .forms import InvoiceForm
+from .models import Invoice
+
 
 def product_list(request):
     sales = Sale.objects.all()
@@ -47,9 +50,7 @@ def sale_create(request):
     return render(request, 'sale_form.html', {'form': form, 'sales': sales})
 
 
-from django.shortcuts import render, redirect
-from .forms import InvoiceForm
-from .models import Invoice, Sale
+
 
 def invoice_create(request):
     if request.method == 'POST':
@@ -73,3 +74,8 @@ def invoice_create(request):
         form = InvoiceForm()
 
     return render(request, 'invoice_form.html', {'form': form})
+
+def invoice_detail(request, pk):
+    invoice = Invoice.objects.get(pk=pk)
+    return render(request, 'invoice_detail.html', {'invoice': invoice})
+
