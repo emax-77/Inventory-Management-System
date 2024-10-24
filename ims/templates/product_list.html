@@ -19,7 +19,7 @@
                 <li>{{ product.name }} - Stock: {{ product.quantity_in_stock }}
                     <div class="action-links">
                         <a href="{% url 'product_edit' product.id %}">Edit</a> |
-                        <a href="{% url 'product_delete' product.id %}">Delete</a>
+                        <a class="delete-link" href="{% url 'product_delete' product.id %}">Delete</a>
                     </div>
                 </li>
                 {% endfor %}
