@@ -8,14 +8,24 @@
     <title>Document</title>
 </head>
 <body>
-    <h2>Invoice List</h2>
-    <ul>
-        {% for invoice in invoices %}
-        <li>
-            <a href="{% url 'invoice_detail' invoice.id %}">Invoice nr. {{ invoice.invoice_number }} - total amount: {{ invoice.total_amount }} € </a>
-            <a href="{% url 'invoice_delete' invoice.id %}">Delete</a>
-        </li>
-        {% endfor %}
-    </ul>
+    <div class="invoice-detail">
+        <h1>Invoice List</h1>
+        <ul>
+            {% for invoice in invoices %}
+                <li>
+                    <a href="{% url 'invoice_detail' invoice.id %}">
+                        Invoice nr. {{ invoice.invoice_number }} - total amount: {{ invoice.total_amount }} €
+                    </a>
+                    <a href="{% url 'invoice_delete' invoice.id %}" class="delete-link">
+                        Delete
+                    </a>
+                </li>
+            {% empty %}
+                <li>No invoices available.</li>
+            {% endfor %}
+        </ul>
+        
+    <a href="{% url 'product_list' %}">Home</a>
+    </div>
 </body>
 </html>
