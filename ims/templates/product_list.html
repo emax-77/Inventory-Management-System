@@ -13,7 +13,7 @@
 
     <div class="grid-container">
         <div class="grid-item1">
-            <h2>Products <a class="button" href="{% url 'product_create' %}">Add New Product</a></h2>
+            <h2>Products</h2>
             <ul>
                 {% for product in products %}
                 <li>{{ product.name }} - Stock: {{ product.quantity_in_stock }}
@@ -27,7 +27,7 @@
         </div>
 
         <div class="grid-item2">
-            <h2>Sales <a class="button" href="{% url 'sale_create' %}">Create Sale</a></h2>
+            <h2>Sales</h2>
             <ul>
                 {% for sale in sales %}
                 <li>{{ sale.product.name }} - Quantity Sold: {{ sale.quantity_sold }} - Date: {{ sale.sale_date }}</li>
@@ -35,7 +35,9 @@
             </ul>
         </div>
         <div class="grid-item3">
-            <h2>Other options</h2>
+            <h2>Options</h2>
+            <a class="button" href="{% url 'product_create' %}">Add New Product</a>
+            <a class="button" href="{% url 'sale_create' %}">Create Sale</a>
             <a class="button" href="{% url 'invoice_create' %}">Create Invoice</a>
             <a class="button" href="{% url 'invoice_list' %}">View Invoices</a>
         </div>
