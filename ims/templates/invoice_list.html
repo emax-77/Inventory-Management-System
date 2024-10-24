@@ -7,6 +7,13 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <h2>Invoice List</h2>
+    <ul>
+        {% for invoice in invoices %}
+        <li>
+            <a href="{% url 'invoice_detail' invoice.id %}">Invoice {{ invoice.invoice_number }}</a>
+        </li>
+        {% endfor %}
+    </ul>
 </body>
 </html>
