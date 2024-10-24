@@ -193,3 +193,12 @@ li {
 .invoice-detail .delete-link:hover {
     color: darkred;
 }
+
+.invoice-detail .home-link {
+    color: green;
+    font-weight: bold;
+}
+
+.invoice-detail .home-link:hover {
+    color: darkgreen;
+}
