@@ -83,3 +83,9 @@ def invoice_list(request):
     invoices = Invoice.objects.all()
     return render(request, 'invoice_list.html', {'invoices': invoices})
 
+def invoice_delete(request, pk):
+    invoice = Invoice.objects.get(pk=pk)
+    if request.method == 'POST':
+        invoice.delete()
+        return redirect('invoice_list')
+    return render(request, 'invoice_confirm_delete.html', {'invoice': invoice})
