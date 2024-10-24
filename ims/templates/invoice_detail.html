@@ -22,7 +22,7 @@
             <li>{{ sale.product.name }} - Quantity: {{ sale.quantity_sold }} - Price: {{ sale.product.price }} €</li>
             {% endfor %}
         </ul>
-        <a href="{% url 'product_list' %}">Home</a>
+        <a class="home-link" href="{% url 'product_list' %}">Home</a>
 
     </div>
     
