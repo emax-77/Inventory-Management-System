@@ -174,7 +174,7 @@ li {
     transition: background-color 0.2s ease-in-out;
 }
 
-/* Invoice detail styles */
+/* Invoice detail and Invoice list styles */
 
 .invoice-detail {
     max-width: 600px;
@@ -184,4 +184,12 @@ li {
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     margin-bottom: 30px;
+}
+.invoice-detail .delete-link {
+    color: red;
+    font-weight: bold;
+}
+
+.invoice-detail .delete-link:hover {
+    color: darkred;
 }
