@@ -1,4 +1,4 @@
-***I am also developing the same project using Flask and MongoDB, and will upload it to GitHub in the coming days.***
+***I am also developing the same project using Flask and MongoDB, please check it out here https://github.com/emax-77/Inventory-Managemet-System-Flask-MongoDB.git***
 
 # Inventory Management System
 ## Simple IMS for small business or home use using Django
