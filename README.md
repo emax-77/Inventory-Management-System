@@ -3,7 +3,7 @@
 # Inventory Management System
 ## Simple IMS for small business or home use using Django
 
-## Project includes (working):
+## Project includes:
 
 - Product Management (Create, Read, Update, Delete)
 - Sales 
