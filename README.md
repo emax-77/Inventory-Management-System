@@ -13,3 +13,8 @@
 ## What's next?
 - Orders
 - Other features possible - will see :)
+
+### Easy to run - Django with SQLite3 only
+- pip install Django
+- clone
+- run :)
