@@ -12,6 +12,13 @@
 </html>
     <h1>Inventory Management System</h1>
 
+    <div>
+        <a class="button" href="{% url 'product_create' %}">Add New Product</a>
+        <a class="button" href="{% url 'sale_create' %}">Create Sale</a>
+        <a class="button" href="{% url 'invoice_create' %}">Create Invoice</a>
+        <a class="button" href="{% url 'invoice_list' %}">View Invoices</a>
+    </div>
+
     <div class="grid-container">
         <div class="grid-item1">
             <h2>Products</h2>
@@ -36,20 +43,21 @@
             </ul>
         </div>
         <div class="grid-item3">
-            <h2>Options</h2>
-            <a class="button" href="{% url 'product_create' %}">Add New Product</a>
-            <br>
-            <br>
-            <br>
-            <a class="button" href="{% url 'sale_create' %}">Create Sale</a>
-            <br>
-            <br>
-            <br>
-            <a class="button" href="{% url 'invoice_create' %}">Create Invoice</a>
-            <br>
-            <br>
-            <br>
-            <a class="button" href="{% url 'invoice_list' %}">View Invoices</a>
+            <h2>List of Invoices</h2>
+            <ul>
+                {% for invoice in invoices %}
+                    <li>
+                        <a href="{% url 'invoice_detail' invoice.id %}">
+                            Invoice nr. {{ invoice.invoice_number }} - total amount: {{ invoice.total_amount }} €
+                        </a>
+                        <a href="{% url 'invoice_delete' invoice.id %}" class="delete-link">
+                            Delete
+                        </a>
+                    </li>
+                {% empty %}
+                    <li>No invoices available.</li>
+                {% endfor %}
+            </ul>
         </div>
     </div>
 
