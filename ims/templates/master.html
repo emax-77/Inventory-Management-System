@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+  <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+
+  <div class="topnav">
+    <a href="{% url 'product_create' %}">ADD NEW PRODUCT</a>
+    <a href="{% url 'sale_create' %}">CREATE SALE</a>
+    <a href="{% url 'invoice_create' %}">CREATE INVOICE</a>
+    <a href="{% url 'invoice_list' %}">VIEW INVOICES</a>
+  </div>
+
+  {% block content %}
+  {% endblock %}
+
+</body>
+</html>
