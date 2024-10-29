@@ -80,7 +80,7 @@ def invoice_detail(request, pk):
     return render(request, 'invoice_detail.html', {'invoice': invoice})
 
 def invoice_list(request):
-    invoices = Invoice.objects.all()
+    invoices = sorted(Invoice.objects.all(), key=lambda x: x.invoice_number)
     return render(request, 'invoice_list.html', {'invoices': invoices})
 
 def invoice_delete(request, pk):
