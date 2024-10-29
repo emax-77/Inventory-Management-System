@@ -4,11 +4,12 @@ from .forms import ProductForm, SaleForm
 from .forms import InvoiceForm
 from .models import Invoice
 
-
+# Main page
 def product_list(request):
     sales = Sale.objects.all()
     products = Product.objects.all()
-    return render(request, 'product_list.html', {'products': products, "sales": sales})
+    invoices = sorted(Invoice.objects.all(), key=lambda x: x.invoice_number)
+    return render(request, 'product_list.html', {'products': products, "sales": sales, "invoices": invoices})
 
 def product_create(request):
     if request.method == 'POST':
@@ -48,9 +49,6 @@ def sale_create(request):
     else:
         form = SaleForm()
     return render(request, 'sale_form.html', {'form': form, 'sales': sales})
-
-
-
 
 def invoice_create(request):
     if request.method == 'POST':
