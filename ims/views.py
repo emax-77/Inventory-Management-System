@@ -1,10 +1,12 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Product, Sale
 from .forms import ProductForm, SaleForm
 from .forms import InvoiceForm
 from .models import Invoice
+from django.http import HttpResponse
+import json
 
-# Main page
+# Main page view
 def product_list(request):
     sales = Sale.objects.all()
     products = Product.objects.all()
@@ -70,11 +72,36 @@ def invoice_create(request):
             return redirect('invoice_detail', pk=invoice.pk)  
     else:
         form = InvoiceForm()
-
     return render(request, 'invoice_form.html', {'form': form})
 
 def invoice_detail(request, pk):
-    invoice = Invoice.objects.get(pk=pk)
+    invoice = get_object_or_404(Invoice, pk=pk)
+
+    if request.method == 'POST':
+        # Convert invoice to dictionary
+        invoice_dict = {
+            'invoice_number': invoice.invoice_number,
+            'total_amount': float(invoice.total_amount),
+            'sales': [
+                {
+                    'product': sale.product.name,
+                    'quantity_sold': sale.quantity_sold,
+                    'price': float(sale.product.price),
+                    'total_amount': float(sale.product.price * sale.quantity_sold)
+                }
+                for sale in invoice.sales.all()
+            ]
+        }
+
+        # Convert dictionary to JSON string
+        invoice_json = json.dumps(invoice_dict, indent=4)
+
+        # Create the response object and set headers
+        response = HttpResponse(invoice_json, content_type='application/json')
+        response['Content-Disposition'] = f'attachment; filename="invoice_{invoice.invoice_number}.json"'
+
+        # Return the response to trigger the file download
+        return response
     return render(request, 'invoice_detail.html', {'invoice': invoice})
 
 def invoice_list(request):
