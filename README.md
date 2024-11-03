@@ -1,4 +1,4 @@
-***I am also developing the same project using Flask and MongoDB, you can check it here: https://github.com/emax-77/Inventory-Managemet-System-Flask-MongoDB.git***
+***I do not use error handling in this project - due to better readability and simplicity of the code, but you can check the error handling in the same project I made using Flask and MongoDB here: https://github.com/emax-77/Inventory-Managemet-System-Flask-MongoDB.git***
 
 # Inventory Management System
 ## Simple IMS for small business using Django
