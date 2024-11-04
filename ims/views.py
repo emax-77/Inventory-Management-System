@@ -15,6 +15,7 @@ def product_list(request):
         return render(request, 'error_page.html', {'error': str(e)})
     return render(request, 'product_list.html', {'products': products, "sales": sales, "invoices": invoices})
 
+# Create a new product
 def product_create(request):
     if request.method == 'POST':
         form = ProductForm(request.POST)
@@ -25,6 +26,7 @@ def product_create(request):
         form = ProductForm()
     return render(request, 'product_form.html', {'form': form})
 
+# Edit an existing product
 def product_edit(request, pk):
     try:
         product = Product.objects.get(pk=pk)
@@ -40,6 +42,7 @@ def product_edit(request, pk):
         form = ProductForm(instance=product)
     return render(request, 'product_form.html', {'form': form})
 
+# Delete a product
 def product_delete(request, pk):
     try:
         product = Product.objects.get(pk=pk)
@@ -51,6 +54,7 @@ def product_delete(request, pk):
         return redirect('product_list')
     return render(request, 'product_confirm_delete.html', {'product': product})
 
+# Create a new sale
 def sale_create(request):
     try:
         sales = Sale.objects.all()
@@ -66,6 +70,7 @@ def sale_create(request):
         form = SaleForm()
     return render(request, 'sale_form.html', {'form': form, 'sales': sales})
 
+# Create a new invoice
 def invoice_create(request):
     if request.method == 'POST':
         form = InvoiceForm(request.POST)
@@ -89,6 +94,7 @@ def invoice_create(request):
         form = InvoiceForm()
     return render(request, 'invoice_form.html', {'form': form})
 
+# View an invoice + download as JSON file (optional)
 def invoice_detail(request, pk):
     try:
         invoice = get_object_or_404(Invoice, pk=pk)
@@ -114,12 +120,14 @@ def invoice_detail(request, pk):
         # Convert dictionary to JSON string
         invoice_json = json.dumps(invoice_dict, indent=4)
 
-        # Create the response object and set headers
+        # Create the response object and set file name
         response = HttpResponse(invoice_json, content_type='application/json')
         response['Content-Disposition'] = f'attachment; filename="invoice_{invoice.invoice_number}.json"'
+        # Download the file (return the response object)
         return response
     return render(request, 'invoice_detail.html', {'invoice': invoice})
 
+# List all invoices
 def invoice_list(request):
     try:
         invoices = sorted(Invoice.objects.all(), key=lambda x: x.invoice_number)
@@ -127,6 +135,7 @@ def invoice_list(request):
         return render(request, 'error_page.html', {'error': str(e)})
     return render(request, 'invoice_list.html', {'invoices': invoices})
 
+# Delete an invoice
 def invoice_delete(request, pk):
     try:
         invoice = Invoice.objects.get(pk=pk)

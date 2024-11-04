@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
-# env values setup / raise an error if the env variable isn't set
+# Env values setup / raise an error if the env variable isn't set
 import os
 from django.core.exceptions import ImproperlyConfigured
 def _require_env(name):
@@ -19,7 +19,7 @@ def _require_env(name):
         raise ImproperlyConfigured('Required environment variable "{}" is not set.'.format(name))
     return value
 
-# smtp setup
+# SMTP setup
 email_name = _require_env('EMAIL_HOST_USER')
 email_password = _require_env('EMAIL_HOST_PASSWORD')
 EMAIL_HOST_USER = email_name 
@@ -94,20 +94,8 @@ WSGI_APPLICATION = 'inventory_management.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-password_postgresql_aws = _require_env('PostgreSQL_AWS_IMS')
 
-"""# PostgreSQL database setup - my is running on AWS RDS - change to your own
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'peter', # change to your own
-        'PASSWORD': password_postgresql_aws, # env variable - change to your own
-        'HOST': 'django-ims.chieic6s67un.eu-north-1.rds.amazonaws.com', # change to your own
-        'PORT': '5432'
-    }
-} """
-# Switched back from PostgreSQL to SQLite3 for testing purposes
+# SQLite3 database setup
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
