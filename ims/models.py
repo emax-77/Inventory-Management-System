@@ -28,11 +28,19 @@ class Sale(models.Model):
     quantity_sold = models.PositiveIntegerField()
     sale_date = models.DateTimeField(auto_now_add=True)
 
+    # decrement quantity_in_stock when a sale is created
     def save(self, *args, **kwargs):
         self.product.quantity_in_stock -= self.quantity_sold
         self.product.save()
         self.product.check_stock()
         super().save(*args, **kwargs)
+    
+    # increment quantity_in_stock when a sale is deleted
+    def delete(self, *args, **kwargs):
+        self.product.quantity_in_stock += self.quantity_sold
+        self.product.save()
+        super().delete(*args, **kwargs)
+
 
     def __str__(self):
         return f"Sale of {self.quantity_sold} {self.product.name}"

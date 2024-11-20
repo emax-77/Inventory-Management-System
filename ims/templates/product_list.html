@@ -31,7 +31,11 @@
             <h2>Sales <a class="button" href="{% url 'sale_create' %}">Create Sale</a></h2>
             <ul>
                 {% for sale in sales %}
-                <li>{{ sale.product.name }} - Quantity Sold: {{ sale.quantity_sold }} - Date: {{ sale.sale_date }}</li>
+                <li>{{ sale.product.name }}, {{ sale.quantity_sold }}pc on {{ sale.sale_date|date:"d.m.Y" }}
+                    <a class="delete-link" href="{% url 'sale_delete' sale.id %}">Delete</a>
+                </li>
+                {% empty %}
+                <li>No sales available.</li>
                 {% endfor %}
             </ul>
         </div>
@@ -43,9 +47,7 @@
                         <a href="{% url 'invoice_detail' invoice.id %}">
                             Invoice nr. {{ invoice.invoice_number }} - total amount: {{ invoice.total_amount }} €
                         </a>
-                        <a href="{% url 'invoice_delete' invoice.id %}" class="delete-link">
-                            Delete
-                        </a>
+                        <a href="{% url 'invoice_delete' invoice.id %}" class="delete-link">Delete</a>
                     </li>
                 {% empty %}
                     <li>No invoices available.</li>

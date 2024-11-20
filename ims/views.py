@@ -70,6 +70,17 @@ def sale_create(request):
         form = SaleForm()
     return render(request, 'sale_form.html', {'form': form, 'sales': sales})
 
+#Delete a sale
+def sale_delete(request, pk):
+    try:
+        sale = Sale.objects.get(pk=pk)
+    except ObjectDoesNotExist:
+        return render(request, 'error_page.html', {'error': 'Sale not found.'})
+    if request.method == 'POST':
+        sale.delete()
+        return redirect('product_list')
+    return render(request, 'sale_confirm_delete.html', {'sale': sale})
+
 # Create a new invoice
 def invoice_create(request):
     if request.method == 'POST':
